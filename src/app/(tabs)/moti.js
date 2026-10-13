@@ -10,12 +10,14 @@ import Scoreboard from '../../../components/game/Scoreboard';
 import GameOptions from '../../../components/game/GameOptions';
 import { useDuel } from '../../game/useDuel';
 import { useGameSettings } from '../../game/GameSettings';
+import { useDuelSounds } from '../../game/useDuelSounds';
 import { getChoice } from '../../game/rules';
 
 export default function MotiGame() {
   const duel = useDuel({ animated: true });
   const focused = useIsFocused();
-  const { demo, timeScale, motionReduced } = useGameSettings();
+  const { demo, timeScale, motionReduced, soundEnabled } = useGameSettings();
+  const sound = useDuelSounds({ enabled: soundEnabled, focused, phase: duel.phase, round: duel.round, timeScale });
   const { width, height } = useWindowDimensions();
   const [deployedId, setDeployedId] = useState(null);
   const [travel, setTravel] = useState(null);
@@ -29,20 +31,28 @@ export default function MotiGame() {
     serial.current += 1;
     setDeployedId(null);
     setTravel(null);
-  }, [demo]);
+    sound.stop();
+  }, [demo, sound.stop]);
 
   function choose(id) {
     if (duel.busy || travel) return;
+    sound.play('select');
     duel.select(id);
     if (id !== deployedId && !motionReduced) setTravel({ choice: id, token: ++serial.current });
     setDeployedId(id);
   }
 
   function reset() {
+    sound.stop();
     serial.current += 1;
     setTravel(null);
     setDeployedId(null);
     duel.reset();
+  }
+
+  function prepare() {
+    sound.play('return');
+    duel.prepare();
   }
 
   const disabled = duel.busy || !!travel || !deployedId;
@@ -71,7 +81,7 @@ export default function MotiGame() {
         </View>
       </ScrollView>
       <View style={styles.actionBar}>
-        <Pressable testID="battle-button" accessibilityRole="button" accessibilityState={{ disabled }} disabled={disabled} onPress={duel.phase === 'result' ? duel.prepare : duel.play}
+        <Pressable testID="battle-button" accessibilityRole="button" accessibilityState={{ disabled }} disabled={disabled} onPress={duel.phase === 'result' ? prepare : duel.play}
           style={({ pressed }) => [styles.play, (pressed || disabled) && { opacity: 0.6 }]}>
           <LinearGradient colors={['#ead2a0', '#c6a76b']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.playFill}>
             <FontAwesome name="bolt" size={21} color="#272333" />

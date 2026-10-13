@@ -2,7 +2,7 @@ import { StyleSheet, Switch, Text, View } from 'react-native';
 import { useGameSettings } from '../../src/game/GameSettings';
 
 export default function DemoControls({ dark = false, busy = false, animationOptions = false }) {
-  const { demo, setDemo, slow, setSlow, reduceMotion, setReduceMotion } = useGameSettings();
+  const { demo, setDemo, slow, setSlow, reduceMotion, setReduceMotion, soundEnabled, setSoundEnabled } = useGameSettings();
   return (
     <View style={[styles.box, dark && styles.dark]}>
       <View style={styles.row}>
@@ -14,6 +14,10 @@ export default function DemoControls({ dark = false, busy = false, animationOpti
       </View>
       {animationOptions && (
         <View style={styles.options}>
+          <View style={styles.row}>
+            <Text style={[styles.title, dark && styles.light]}>Efeitos sonoros</Text>
+            <Switch accessibilityLabel="Efeitos sonoros" value={soundEnabled} onValueChange={setSoundEnabled} trackColor={{ false: '#667085', true: '#417665' }} thumbColor="#edf0f5" />
+          </View>
           <View style={styles.row}>
             <Text style={[styles.title, dark && styles.light]}>Câmera lenta</Text>
             <Switch accessibilityLabel="Câmera lenta" value={slow} onValueChange={setSlow} disabled={busy} trackColor={{ false: '#667085', true: '#417665' }} thumbColor="#edf0f5" />

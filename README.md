@@ -2,11 +2,15 @@
 
 Um jogo de pedra, papel e tesoura em duas versões dentro do mesmo aplicativo, preparado para um seminário sobre Moti.
 
+Os **slides interativos do seminário de 30 minutos sobre Moti** estão em [`seminario-moti/`](seminario-moti/README.md). Execute `npm run seminario` para ensinar instalação, componentes e propriedades da biblioteca, com laboratórios reais, votações em sala, desafios em dupla e exemplos do código do jogo.
+
 - **Versão básica** (`/game`): `View`, `Text`, `Pressable`, `Image` e `StyleSheet`. As figuras são PNGs locais, sem carregamento de fontes para pedra, papel e tesoura.
 - **Duelo Moti** (`/moti`): a carta viaja da mão até o campo e se amplia durante a batalha. A invocação tem anéis de energia, a revelação aproxima as duas cartas, a colisão dispara ondas de choque e fragmentos, e o vencedor ganha o centro da arena. Todas as animações são declaradas em Moti.
 - **Início** (`/home`): escolha entre o jogo clássico e o duelo de cartas.
 
 O botão **Batalhar** fica fixo acima das abas nas duas telas. O placar é compacto, e as configurações ficam em **Opções do jogo**, no ícone de ajustes do cabeçalho.
+
+O duelo Moti tem efeitos sonoros originais de seleção, invocação, revelação, impacto, vitória, derrota, empate e retorno à mão, reproduzidos por `expo-audio`. **Opções do jogo → Efeitos sonoros** permite silenciar mesmo durante uma batalha. Os efeitos param ao reiniciar, trocar de tela ou colocar o app em segundo plano; a câmera lenta também reduz a velocidade dos sons. A versão básica não reproduz efeitos.
 
 ## Executar
 

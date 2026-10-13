@@ -8,13 +8,17 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "seminario": "node seminario-moti/serve.cjs",
+    "seminario:build": "expo export --platform web --max-workers 1 --output-dir seminario-moti/.game-build && node seminario-moti/build.cjs",
+    "seminario:check": "node seminario-moti/check.cjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/native": "^7.1.8",
     "expo": "~54.0.37",
+    "expo-audio": "~1.1.1",
     "expo-constants": "~18.0.14",
     "expo-linear-gradient": "~15.0.8",
     "expo-linking": "~8.0.12",

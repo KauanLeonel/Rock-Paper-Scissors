@@ -7,6 +7,7 @@ export function GameSettingsProvider({ children }) {
   const [demo, setDemo] = useState(false);
   const [slow, setSlow] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const [systemReduceMotion, setSystemReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export function GameSettingsProvider({ children }) {
   }, []);
 
   return (
-    <SettingsContext.Provider value={{ demo, setDemo, slow, setSlow, reduceMotion,
+    <SettingsContext.Provider value={{ demo, setDemo, slow, setSlow, reduceMotion, soundEnabled, setSoundEnabled,
       setReduceMotion, motionReduced: reduceMotion || systemReduceMotion, timeScale: slow ? 1.8 : 1 }}>
       {children}
     </SettingsContext.Provider>

@@ -24,13 +24,13 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-            "bundler": "metro"
-
+      "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false }]
     ],
-     "scheme": "react-native-expo-ads-2sem2026",
+    "scheme": "react-native-expo-ads-2sem2026",
     "experiments": {
       "typedRoutes": true
     }
